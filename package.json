@@ -4,8 +4,11 @@
   "description": "Match people by lifestyle",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npm run build && nodemon lib/app.js",
+    "prod": "BABEL_ENV=production npm run build && node lib/app.js",
+    "clean": "rm -r lib && mkdir lib",
+    "prebuild": "npm run clean",
+    "build": "babel src -d lib"
   },
   "repository": {
     "type": "git",
@@ -23,6 +26,10 @@
     "mongoose": "^5.4.4"
   },
   "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "babel-preset-minify": "^0.5.0",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.9"
   }

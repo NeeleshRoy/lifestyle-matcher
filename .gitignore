@@ -57,4 +57,7 @@ typings/
 # dotenv environment variables file
 .env
 .env.test
+
+# Custom
 db/
+lib/
