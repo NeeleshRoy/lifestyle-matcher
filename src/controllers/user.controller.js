@@ -1,10 +1,10 @@
 const User = require('../models/user.model');
 
-exports.test =  (req, res) => {
+exports.test = (req, res) => {
   res.status(200).send('greeting');
 };
 
-exports.user_create =  (req, res) => {
+exports.user_create = (req, res, next) => {
   let user = new User({
     name           : req.body.name,
     provider       : req.body.provider,
@@ -24,7 +24,7 @@ exports.user_create =  (req, res) => {
     groupie        : req.body.groupie
   });
 
-  user.save( (err) => {
+  user.save((err) => {
     if (err) {
       return next(err);
     }
@@ -32,8 +32,8 @@ exports.user_create =  (req, res) => {
   });
 };
 
-exports.user_details = (req, res) => {
-  User.findById(req.params.id,  (err, user) => {
+exports.user_details = (req, res, next) => {
+  User.findById(req.params.id, (err, user) => {
     if (err) {
       return next(err);
     }

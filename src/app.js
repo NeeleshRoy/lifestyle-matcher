@@ -3,14 +3,7 @@ const dbConfig = require('./db/secret');
 const mongoose = require('mongoose');
 const dev_db_url = 'mongodb://' + dbConfig.username + ':' + dbConfig.password + '@' + dbConfig.baseurl;
 const MONGO_URL = process.env.MONGODB_URI || dev_db_url;
-mongoose.connect(MONGO_URL, { useNewUrlParser: true }).then(
-  () => {
-    console.log('Database is connected');
-  },
-  (err) => {
-    console.log('Can not connect to the database' + err);
-  }
-);
+mongoose.connect(MONGO_URL, { useNewUrlParser: true, ssl: true });
 mongoose.Promise = global.Promise;
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -32,7 +25,7 @@ app.use((req, res, next) => {
 });
 
 // error handler
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
