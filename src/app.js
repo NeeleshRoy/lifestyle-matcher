@@ -1,4 +1,5 @@
 // DATABASE connection
+require('dotenv').config();
 const dbConfig = require('./db/secret');
 const mongoose = require('mongoose');
 const dev_db_url = 'mongodb://' + dbConfig.username + ':' + dbConfig.password + '@' + dbConfig.baseurl;
