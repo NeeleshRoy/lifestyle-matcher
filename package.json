@@ -4,7 +4,7 @@
   "description": "Match people by lifestyle",
   "main": "app.js",
   "scripts": {
-    "dev": "npm run build && nodemon lib/app.js",
+    "dev": "nodemon src/app.js",
     "prod": "BABEL_ENV=production npm run build && node lib/app.js",
     "clean": "rm -r lib && mkdir lib",
     "prebuild": "npm run clean",

@@ -4,7 +4,7 @@ const dbConfig = require('./db/secret');
 const mongoose = require('mongoose');
 const dev_db_url = 'mongodb://' + dbConfig.username + ':' + dbConfig.password + '@' + dbConfig.baseurl;
 const MONGO_URL = process.env.MONGODB_URI || dev_db_url;
-mongoose.connect(MONGO_URL, { useNewUrlParser: true, ssl: true });
+mongoose.connect(MONGO_URL, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));

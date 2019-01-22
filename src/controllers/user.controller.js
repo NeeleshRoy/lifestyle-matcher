@@ -24,11 +24,11 @@ exports.user_create = (req, res, next) => {
     groupie        : req.body.groupie
   });
 
-  user.save((err) => {
+  user.save((err, user) => {
     if (err) {
       return next(err);
     }
-    res.status(200).send('user created successfully');
+    res.status(200).send({ user_id: user._id, status: 'success' });
   });
 };
 
@@ -38,5 +38,12 @@ exports.user_details = (req, res, next) => {
       return next(err);
     }
     res.status(200).send(user);
+  });
+};
+
+exports.user_update = (req, res, next) => {
+  User.findByIdAndUpdate(req.params.id, { $set: req.body }, (err, user) => {
+    if (err) return next(err);
+    res.status(200).send({ user, status: 'success' });
   });
 };
